@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Button } from '../Buttom/Button';
 import styles from './JournalForm.module.css';
 
-export function JournalForm() {
+export function JournalForm({ addDataItem }) {
 	const [inputData, setInputData] = useState('');
 	const handleChange = e => {
 		setInputData(e.target.value);
@@ -12,7 +12,7 @@ export function JournalForm() {
 		e.preventDefault();
 		const data = new FormData(e.target);
 		const value = Object.fromEntries(data);
-		console.log(value);
+		addDataItem(value);
 	};
 
 	return (
@@ -25,7 +25,7 @@ export function JournalForm() {
 			/>
 			<input type='date' name='date' />
 			<input className={styles['form-input']} name='tag' />
-			<textarea name='post' cols='30' rows='10'></textarea>
+			<textarea name='text' cols='30' rows='10'></textarea>
 			<Button text='Save' />
 		</form>
 	);

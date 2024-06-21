@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './App.css';
 import CardButton from './components/CardButton/CardButton';
 import { Header } from './components/Header/Header';
@@ -9,31 +10,41 @@ import { BodyContent } from './layouts/BodyContent/BodyContent';
 import { LeftPanel } from './layouts/LeftPanel/LerftPanel';
 import { shareData } from './utils/ShareData/ShareData';
 
+const INITSIAL_DATA = shareData;
+
 function App() {
+	const [dataItems, setData] = useState(INITSIAL_DATA);
+
+	const addDataItem = dataItem => {
+		setData(oldAtaItem => [
+			...oldAtaItem,
+			{
+				title: dataItem.title,
+				text: dataItem.text,
+				date: new Date(dataItem.date),
+			},
+		]);
+	};
+
 	return (
 		<div className='app'>
 			<LeftPanel>
 				<Header />
 				<JournalAddButton />
 				<JournalList>
-					<CardButton>
-						<JournalItem
-							title={shareData[0].title}
-							text={shareData[0].text}
-							date={shareData[0].date}
-						/>
-					</CardButton>
-					<CardButton>
-						<JournalItem
-							title={shareData[1].title}
-							text={shareData[1].text}
-							date={shareData[1].date}
-						/>
-					</CardButton>
+					{dataItems.map(item => (
+						<CardButton>
+							<JournalItem
+								title={item.title}
+								text={item.text}
+								date={item.date}
+							/>
+						</CardButton>
+					))}
 				</JournalList>
 			</LeftPanel>
 			<BodyContent>
-				<JournalForm />
+				<JournalForm addDataItem={addDataItem} />
 			</BodyContent>
 		</div>
 	);
