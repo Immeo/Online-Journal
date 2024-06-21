@@ -19,11 +19,16 @@ function App() {
 		setData(oldAtaItem => [
 			...oldAtaItem,
 			{
+				id: Math.max(...oldAtaItem.map(item => item.id)) + 1,
 				title: dataItem.title,
 				text: dataItem.text,
 				date: new Date(dataItem.date),
 			},
 		]);
+	};
+
+	const sortDataItems = () => {
+		setData(oldAtaItem => [...oldAtaItem].sort((a, b) => a.date - b.date));
 	};
 
 	return (
@@ -33,7 +38,7 @@ function App() {
 				<JournalAddButton />
 				<JournalList>
 					{dataItems.map(item => (
-						<CardButton>
+						<CardButton key={item.id}>
 							<JournalItem
 								title={item.title}
 								text={item.text}
