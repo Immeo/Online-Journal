@@ -1,19 +1,9 @@
-import styles from './Button.module.css'
-import { useState } from 'react'
+import styles from './Button.module.css';
 
-export function Button() {
-	const [NameButton, setNameButton] = useState('op')
-	function checkClick() {
-		setNameButton(prompt)
-	}
+export function Button({ text }) {
 	return (
 		<div>
-			<button
-				onClick={checkClick}
-				className={`${styles.button} ${styles.accent}`}
-			>
-				{NameButton}
-			</button>
+			<button className={`${styles.button} ${styles.accent}`}>{text}</button>
 		</div>
-	)
+	);
 }

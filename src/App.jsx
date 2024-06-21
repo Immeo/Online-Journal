@@ -1,19 +1,20 @@
-import './App.css'
-import CardButton from './components/CardButton/CardButton'
-import { Header } from './components/Header/Header'
-import { JournalAddButton } from './components/JournalAddButton/JournalAddButton'
-import JournalItem from './components/JournalItem/JournalItem'
-import { JournalList } from './components/JournalList/JournalList'
-import { BodyContent } from './layouts/BodyContent/BodyContent'
-import { LeftPanel } from './layouts/LeftPanel/LerftPanel'
-import { shareData } from './utils/ShareData/ShareData'
+import './App.css';
+import CardButton from './components/CardButton/CardButton';
+import { Header } from './components/Header/Header';
+import { JournalAddButton } from './components/JournalAddButton/JournalAddButton';
+import { JournalForm } from './components/JournalForm/JournalForm';
+import JournalItem from './components/JournalItem/JournalItem';
+import { JournalList } from './components/JournalList/JournalList';
+import { BodyContent } from './layouts/BodyContent/BodyContent';
+import { LeftPanel } from './layouts/LeftPanel/LerftPanel';
+import { shareData } from './utils/ShareData/ShareData';
 
 function App() {
 	return (
 		<div className='app'>
 			<LeftPanel>
 				<Header />
-				<JournalAddButton/>
+				<JournalAddButton />
 				<JournalList>
 					<CardButton>
 						<JournalItem
@@ -31,9 +32,11 @@ function App() {
 					</CardButton>
 				</JournalList>
 			</LeftPanel>
-			<BodyContent>asd</BodyContent>
+			<BodyContent>
+				<JournalForm />
+			</BodyContent>
 		</div>
-	)
+	);
 }
 
-export default App
+export default App;
