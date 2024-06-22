@@ -27,8 +27,12 @@ function App() {
 		]);
 	};
 
-	const sortDataItems = () => {
-		setData(oldAtaItem => [...oldAtaItem].sort((a, b) => a.date - b.date));
+	const sortDataItems = (a, b) => {
+		if (a.date < b.date) {
+			return -1;
+		} else if (a.date > b.date) {
+			return 1;
+		}
 	};
 
 	return (
@@ -37,7 +41,7 @@ function App() {
 				<Header />
 				<JournalAddButton />
 				<JournalList>
-					{dataItems.map(item => (
+					{dataItems.sort(sortDataItems).map(item => (
 						<CardButton key={item.id}>
 							<JournalItem
 								title={item.title}
