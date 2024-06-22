@@ -19,7 +19,10 @@ function App() {
 		setData(oldAtaItem => [
 			...oldAtaItem,
 			{
-				id: Math.max(...oldAtaItem.map(item => item.id)) + 1,
+				id:
+					oldAtaItem.length > 0
+						? Math.max(...oldAtaItem.map(item => item.id)) + 1
+						: 1,
 				title: dataItem.title,
 				text: dataItem.text,
 				date: new Date(dataItem.date),
@@ -28,9 +31,9 @@ function App() {
 	};
 
 	const sortDataItems = (a, b) => {
-		if (a.date < b.date) {
+		if (a.date > b.date) {
 			return -1;
-		} else if (a.date > b.date) {
+		} else if (a.date < b.date) {
 			return 1;
 		}
 	};
@@ -41,15 +44,17 @@ function App() {
 				<Header />
 				<JournalAddButton />
 				<JournalList>
-					{dataItems.sort(sortDataItems).map(item => (
-						<CardButton key={item.id}>
-							<JournalItem
-								title={item.title}
-								text={item.text}
-								date={item.date}
-							/>
-						</CardButton>
-					))}
+					{dataItems.length === 0
+						? 'The notes are empty. Add a new note'
+						: dataItems.sort(sortDataItems).map(item => (
+								<CardButton key={item.id}>
+									<JournalItem
+										title={item.title}
+										text={item.text}
+										date={item.date}
+									/>
+								</CardButton>
+						  ))}
 				</JournalList>
 			</LeftPanel>
 			<BodyContent>
