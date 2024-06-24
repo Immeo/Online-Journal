@@ -55,26 +55,54 @@ export function JournalForm({ addDataItem }) {
 
 	return (
 		<form action='/' className={styles['journal-form']} onSubmit={addNotes}>
-			<input
-				type='text'
-				name='title'
-				value={inputData}
-				onChange={handleChange}
-				className={cn(styles['form__title__input'], [
-					formValidatorState.title ? '' : styles['journal__form-error'],
-				])}
-			/>
-			<input
-				type='date'
-				name='date'
-				className={formValidatorState.date ? '' : styles['journal__form-error']}
-			/>
-			<input className={styles['form-input']} name='tag' />
+			<div>
+				<input
+					type='text'
+					name='title'
+					value={inputData}
+					onChange={handleChange}
+					className={cn(styles['form__title__input'], [
+						formValidatorState.title ? '' : styles['journal__form-error'],
+					])}
+					placeholder='Title'
+				/>
+			</div>
+			<div className={styles['form__row']}>
+				<label htmlFor='form__label' className={styles['form__label']}>
+					<img src='/calendarIcon.svg' alt='Add date icon' />
+					<span>Date</span>
+				</label>
+				<input
+					type='date'
+					name='date'
+					id='form__date'
+					className={cn(styles['form__input'], [
+						formValidatorState.date ? '' : styles['journal__form-error'],
+					])}
+					placeholder='Enter date'
+				/>
+			</div>
+			<div className={styles['form__row']}>
+				<label htmlFor='form__tag' className={styles['form__label']}>
+					<img src='/tagIcon.svg' alt='Add tag icon' />
+					<span>Tag</span>
+				</label>
+				<input
+					className={cn(styles['form__input'], [
+						formValidatorState.title ? '' : styles['journal__form-error'],
+					])}
+					name='tag'
+					id='form__tag'
+					placeholder='Enter tag'
+				/>
+			</div>
 			<textarea
 				name='text'
 				cols='30'
 				rows='10'
-				className={formValidatorState.text ? '' : styles['journal__form-error']}
+				className={cn(styles['form__input'], [
+					formValidatorState.text ? '' : styles['journal__form-error'],
+				])}
 			></textarea>
 			<Button text='Save' />
 		</form>
