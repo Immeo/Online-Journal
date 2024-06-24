@@ -3,3 +3,12 @@
 	flex-direction: column;
 	gap: 30px;
 }
+
+.form__title__input {
+	background: none;
+	border-bottom: 1px solid #3b3939;
+}
+
+.journal__form-error {
+	border: 1px solid red;
+}

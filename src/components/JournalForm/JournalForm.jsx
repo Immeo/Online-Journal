@@ -1,3 +1,4 @@
+import cn from 'classnames';
 import { useState } from 'react';
 import { Button } from '../Buttom/Button';
 import styles from './JournalForm.module.css';
@@ -59,25 +60,21 @@ export function JournalForm({ addDataItem }) {
 				name='title'
 				value={inputData}
 				onChange={handleChange}
-				style={{
-					border: formValidatorState.title ? undefined : '1px solid red',
-				}}
+				className={cn(styles['form__title__input'], [
+					formValidatorState.title ? '' : styles['journal__form-error'],
+				])}
 			/>
 			<input
 				type='date'
 				name='date'
-				style={{
-					border: formValidatorState.date ? undefined : '1px solid red',
-				}}
+				className={formValidatorState.date ? '' : styles['journal__form-error']}
 			/>
 			<input className={styles['form-input']} name='tag' />
 			<textarea
 				name='text'
 				cols='30'
 				rows='10'
-				style={{
-					border: formValidatorState.text ? '' : '1px solid red',
-				}}
+				className={formValidatorState.text ? '' : styles['journal__form-error']}
 			></textarea>
 			<Button text='Save' />
 		</form>
