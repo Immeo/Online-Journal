@@ -22,6 +22,11 @@ function App() {
 			);
 		}
 	}, []);
+	useEffect(() => {
+		if (dataItems.length) {
+			localStorage.setItem('localData', JSON.stringify(dataItems));
+		}
+	}, [dataItems]);
 
 	const addDataItem = dataItem => {
 		setData(oldAtaItem => [
