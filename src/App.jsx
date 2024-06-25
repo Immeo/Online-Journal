@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import CardButton from './components/CardButton/CardButton';
 import { Header } from './components/Header/Header';
@@ -8,12 +8,20 @@ import JournalItem from './components/JournalItem/JournalItem';
 import { JournalList } from './components/JournalList/JournalList';
 import { BodyContent } from './layouts/BodyContent/BodyContent';
 import { LeftPanel } from './layouts/LeftPanel/LerftPanel';
-import { shareData } from './utils/ShareData/ShareData';
-
-const INITSIAL_DATA = shareData;
 
 function App() {
-	const [dataItems, setData] = useState(INITSIAL_DATA);
+	const [dataItems, setData] = useState([]);
+	useEffect(() => {
+		const localStoreData = JSON.parse(localStorage.getItem('localData'));
+		if (localStoreData) {
+			setData(
+				localStoreData.map(item => ({
+					...item,
+					date: new Date(item.date),
+				}))
+			);
+		}
+	}, []);
 
 	const addDataItem = dataItem => {
 		setData(oldAtaItem => [
