@@ -1,14 +1,31 @@
 import cn from 'classnames';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '../Buttom/Button';
 import styles from './JournalForm.module.css';
 
+const INITIAL_STATE = {
+	title: true,
+	text: true,
+	date: true,
+};
+
 export function JournalForm({ addDataItem }) {
-	const [formValidatorState, setFormValidatorState] = useState({
-		title: true,
-		text: true,
-		date: true,
-	});
+	const [formValidatorState, setFormValidatorState] = useState(INITIAL_STATE);
+
+	useEffect(() => {
+		if (
+			!formValidatorState.title ||
+			!formValidatorState.text ||
+			!formValidatorState.date
+		) {
+			setTimeout(() => {
+				setFormValidatorState(INITIAL_STATE);
+			}, 3000);
+		}
+		return () => {
+			clearTimeout();
+		};
+	}, [formValidatorState]);
 
 	const [inputData, setInputData] = useState('');
 	const handleChange = e => {
