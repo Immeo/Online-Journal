@@ -23,20 +23,28 @@ export function JournalForm({ addDataItem }) {
 	useEffect(() => {
 		if (isFormReadyToSubmit) {
 			addDataItem(values);
+			disatchForm({ type: 'CLEAR' });
 		}
 	}, [isFormReadyToSubmit]);
 
+	const onChange = e => {
+		disatchForm({
+			type: 'INPUT_CHANGE',
+			payload: { [e.target.name]: e.target.value },
+		});
+	};
+
 	const addNotes = e => {
 		e.preventDefault();
-		const data = new FormData(e.target);
-		const value = Object.fromEntries(data);
-		disatchForm({ type: 'SUBMIT', payload: value });
+		disatchForm({ type: 'SUBMIT' });
 	};
 
 	return (
 		<form className={styles['journal-form']} onSubmit={addNotes}>
 			<div>
 				<input
+					value={values.title}
+					onChange={onChange}
 					type='text'
 					name='title'
 					className={cn(styles['form__title__input'], {
@@ -51,6 +59,8 @@ export function JournalForm({ addDataItem }) {
 					<span>Date</span>
 				</label>
 				<input
+					value={values.date}
+					onChange={onChange}
 					type='date'
 					name='date'
 					id='form__date'
@@ -66,6 +76,8 @@ export function JournalForm({ addDataItem }) {
 					<span>Tag</span>
 				</label>
 				<input
+					value={values.tag}
+					onChange={onChange}
 					className={cn(styles['form__input'], {
 						[styles['journal__form-error']]: !isValid.title,
 					})}
@@ -75,6 +87,8 @@ export function JournalForm({ addDataItem }) {
 				/>
 			</div>
 			<textarea
+				value={values.text}
+				onChange={onChange}
 				name='text'
 				cols='30'
 				rows='10'
