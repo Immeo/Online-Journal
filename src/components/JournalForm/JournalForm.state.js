@@ -33,6 +33,10 @@ export function formReducer(state, action) {
 				isFormReadyToSubmit: titleValidity && textValidity && dateValidity,
 			};
 		case 'CLEAR':
-			return { ...state, values: INITIAL_STATE.values };
+			return {
+				...state,
+				values: INITIAL_STATE.values,
+				isFormReadyToSubmit: false,
+			};
 	}
 }

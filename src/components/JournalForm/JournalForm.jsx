@@ -25,7 +25,7 @@ export function JournalForm({ addDataItem }) {
 			addDataItem(values);
 			disatchForm({ type: 'CLEAR' });
 		}
-	}, [isFormReadyToSubmit]);
+	}, [isFormReadyToSubmit, values, addDataItem]);
 
 	const onChange = e => {
 		disatchForm({
