@@ -1,6 +1,7 @@
 import cn from 'classnames';
 import { useEffect, useReducer, useRef } from 'react';
 import { Button } from '../Button/Button';
+import { Input } from '../Input/Input';
 import styles from './JournalForm.module.css';
 import { INITIAL_STATE, formReducer } from './JournalForm.state';
 
@@ -60,16 +61,15 @@ export function JournalForm({ addDataItem }) {
 	return (
 		<form className={styles['journal-form']} onSubmit={addNotes}>
 			<div>
-				<input
+				<Input
 					ref={titleRef}
 					value={values.title}
+					isValid={isValid.title}
 					onChange={onChange}
-					type='text'
+					type={'text'}
 					name='title'
-					className={cn(styles['form__title__input'], {
-						[styles['journal__form-error']]: !isValid.title,
-					})}
 					placeholder='Title'
+					appearence='title'
 				/>
 			</div>
 			<div className={styles['form__row']}>
@@ -77,16 +77,14 @@ export function JournalForm({ addDataItem }) {
 					<img src='/calendarIcon.svg' alt='Add date icon' />
 					<span>Date</span>
 				</label>
-				<input
+				<Input
 					ref={dateRef}
 					value={values.date}
+					isValid={isValid.date}
 					onChange={onChange}
 					type='date'
 					name='date'
 					id='form__date'
-					className={cn(styles['form__input'], {
-						[styles['journal__form-error']]: !isValid.date,
-					})}
 					placeholder='Enter date'
 				/>
 			</div>
@@ -95,12 +93,9 @@ export function JournalForm({ addDataItem }) {
 					<img src='/tagIcon.svg' alt='Add tag icon' />
 					<span>Tag</span>
 				</label>
-				<input
+				<Input
 					value={values.tag}
 					onChange={onChange}
-					className={cn(styles['form__input'], {
-						[styles['journal__form-error']]: !isValid.title,
-					})}
 					name='tag'
 					id='form__tag'
 					placeholder='Enter tag'

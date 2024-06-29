@@ -45,10 +45,6 @@
 	color: #f2f2f2;
 }
 
-.form__input::-webkit-calendar-picker-indicator {
-	opacity: 0;
-}
-
 .journal__form-error {
 	border: 1px solid red;
 }

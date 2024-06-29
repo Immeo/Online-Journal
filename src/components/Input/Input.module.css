@@ -1,0 +1,29 @@
+.form__input {
+	font-family: 'Source Sans 3', sans-serif;
+	width: 100%;
+	font-size: 14px;
+	font-weight: 600;
+	border: none;
+	background: none;
+	color: #fff;
+}
+
+.form__input::placeholder {
+	color: #f2f2f2;
+}
+
+.form__title__input {
+	font-size: 32px;
+}
+
+.form__title__input::placeholder {
+	color: #f2f2f2;
+}
+
+.form__input::-webkit-calendar-picker-indicator {
+	filter: invert(1);
+}
+
+.journal__form-error {
+	border: 1px solid red;
+}
