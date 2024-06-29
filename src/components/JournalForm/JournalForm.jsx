@@ -1,5 +1,5 @@
 import cn from 'classnames';
-import { useEffect, useReducer } from 'react';
+import { useEffect, useReducer, useRef } from 'react';
 import { Button } from '../Button/Button';
 import styles from './JournalForm.module.css';
 import { INITIAL_STATE, formReducer } from './JournalForm.state';
@@ -7,10 +7,28 @@ import { INITIAL_STATE, formReducer } from './JournalForm.state';
 export function JournalForm({ addDataItem }) {
 	const [formState, disatchForm] = useReducer(formReducer, INITIAL_STATE);
 	const { isValid, isFormReadyToSubmit, values } = formState;
+	const titleRef = useRef();
+	const textRef = useRef();
+	const dateRef = useRef();
+
+	const focusError = isValid => {
+		switch (true) {
+			case !isValid.title:
+				titleRef.current.focus();
+				break;
+			case !isValid.text:
+				textRef.current.focus();
+				break;
+			case !isValid.date:
+				dateRef.current.focus();
+				break;
+		}
+	};
 
 	useEffect(() => {
 		let timerIs;
 		if (!isValid.title || !isValid.text || !isValid.date) {
+			focusError(isValid);
 			setTimeout(() => {
 				disatchForm({ type: 'RESET_VALIDITY' });
 			}, 3000);
@@ -43,6 +61,7 @@ export function JournalForm({ addDataItem }) {
 		<form className={styles['journal-form']} onSubmit={addNotes}>
 			<div>
 				<input
+					ref={titleRef}
 					value={values.title}
 					onChange={onChange}
 					type='text'
@@ -59,6 +78,7 @@ export function JournalForm({ addDataItem }) {
 					<span>Date</span>
 				</label>
 				<input
+					ref={dateRef}
 					value={values.date}
 					onChange={onChange}
 					type='date'
@@ -87,6 +107,7 @@ export function JournalForm({ addDataItem }) {
 				/>
 			</div>
 			<textarea
+				ref={textRef}
 				value={values.text}
 				onChange={onChange}
 				name='text'
