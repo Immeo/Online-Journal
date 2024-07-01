@@ -31,7 +31,7 @@ function App() {
 							? Math.max(...dataItems.map(i => i.id)) + 1
 							: 1,
 					title: dataItem.title,
-					text: dataItem.description,
+					text: dataItem.text,
 					date: new Date(),
 				},
 			]);
