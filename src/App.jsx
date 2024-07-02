@@ -3,6 +3,7 @@ import { Header } from './components/Header/Header';
 import { JournalAddButton } from './components/JournalAddButton/JournalAddButton';
 import { JournalForm } from './components/JournalForm/JournalForm';
 import { JournalList } from './components/JournalList/JournalList';
+import { UserContext } from './context/user.context';
 import { useLocalStorage } from './hooks/use-localstorage.hook';
 import { BodyContent } from './layouts/BodyContent/BodyContent';
 import { LeftPanel } from './layouts/LeftPanel/LerftPanel';
@@ -39,16 +40,18 @@ function App() {
 	};
 
 	return (
-		<div className='app'>
-			<LeftPanel>
-				<Header />
-				<JournalAddButton />
-				<JournalList items={mapItems(dataItems)} />
-			</LeftPanel>
-			<BodyContent>
-				<JournalForm addDataItem={addDataItem} />
-			</BodyContent>
-		</div>
+		<UserContext.Provider value={{ userId: 1 }}>
+			<div className='app'>
+				<LeftPanel>
+					<Header />
+					<JournalAddButton />
+					<JournalList items={mapItems(dataItems)} />
+				</LeftPanel>
+				<BodyContent>
+					<JournalForm addDataItem={addDataItem} />
+				</BodyContent>
+			</div>
+		</UserContext.Provider>
 	);
 }
 
