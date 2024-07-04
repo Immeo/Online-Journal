@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './App.css';
 import { Header } from './components/Header/Header';
 import { JournalAddButton } from './components/JournalAddButton/JournalAddButton';
@@ -12,7 +13,6 @@ function mapItems(items) {
 	if (!items) {
 		return [];
 	}
-	console.log(items);
 	return items.map(i => ({
 		...i,
 		date: new Date(i.date),
@@ -21,6 +21,7 @@ function mapItems(items) {
 
 function App() {
 	const [dataItems, setData] = useLocalStorage('localData');
+	const [userId, setUserId] = useState(2);
 
 	const addDataItem = dataItem => {
 		if (!dataItem.id) {
@@ -40,7 +41,7 @@ function App() {
 	};
 
 	return (
-		<UserContext.Provider value={{ userId: 2 }}>
+		<UserContext.Provider value={{ userId, setUserId }}>
 			<div className='app'>
 				<LeftPanel>
 					<Header />
