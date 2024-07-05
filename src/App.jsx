@@ -1,10 +1,9 @@
-import { useState } from 'react';
 import './App.css';
 import { Header } from './components/Header/Header';
 import { JournalAddButton } from './components/JournalAddButton/JournalAddButton';
 import { JournalForm } from './components/JournalForm/JournalForm';
 import { JournalList } from './components/JournalList/JournalList';
-import { UserContext } from './context/user.context';
+import { UserContextProvider } from './context/user.context';
 import { useLocalStorage } from './hooks/use-localstorage.hook';
 import { BodyContent } from './layouts/BodyContent/BodyContent';
 import { LeftPanel } from './layouts/LeftPanel/LerftPanel';
@@ -21,7 +20,6 @@ function mapItems(items) {
 
 function App() {
 	const [dataItems, setData] = useLocalStorage('localData');
-	const [userId, setUserId] = useState(2);
 
 	const addDataItem = dataItem => {
 		if (!dataItem.id) {
@@ -41,7 +39,7 @@ function App() {
 	};
 
 	return (
-		<UserContext.Provider value={{ userId, setUserId }}>
+		<UserContextProvider>
 			<div className='app'>
 				<LeftPanel>
 					<Header />
@@ -52,7 +50,7 @@ function App() {
 					<JournalForm addDataItem={addDataItem} />
 				</BodyContent>
 			</div>
-		</UserContext.Provider>
+		</UserContextProvider>
 	);
 }
 
