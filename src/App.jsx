@@ -30,8 +30,7 @@ function App() {
 						dataItems.length > 0
 							? Math.max(...dataItems.map(i => i.id)) + 1
 							: 1,
-					title: dataItem.title,
-					text: dataItem.text,
+					...dataItem,
 					date: new Date(),
 				},
 			]);

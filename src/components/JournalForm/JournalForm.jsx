@@ -60,9 +60,12 @@ export function JournalForm({ addDataItem }) {
 		disatchForm({ type: 'SUBMIT' });
 	};
 
+	useEffect(() => {
+		disatchForm({ type: 'INPUT_CHANGE', payload: { userId } });
+	}, [userId]);
+
 	return (
 		<form className={styles['journal-form']} onSubmit={addNotes}>
-			{userId}
 			<div>
 				<Input
 					ref={titleRef}
