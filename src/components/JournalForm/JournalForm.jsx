@@ -118,7 +118,7 @@ export function JournalForm({ addDataItem }) {
 					[styles['journal__form-error']]: !isValid.text,
 				})}
 			></textarea>
-			<Button text='Save' />
+			<Button>Save</Button>
 		</form>
 	);
 }

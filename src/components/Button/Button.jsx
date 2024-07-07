@@ -1,9 +1,11 @@
 import styles from './Button.module.css';
 
-export function Button({ text }) {
+export function Button({ children, onClick }) {
 	return (
 		<div>
-			<button className={`${styles.button} ${styles.accent}`}>{text}</button>
+			<button onClick={onClick} className={`${styles.button} ${styles.accent}`}>
+				{children}
+			</button>
 		</div>
 	);
 }
