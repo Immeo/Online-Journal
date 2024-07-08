@@ -2,7 +2,7 @@ import cn from 'classnames';
 import { forwardRef } from 'react';
 import styles from './Input.module.css';
 
-export const Input = forwardRef(function Input(
+const Input = forwardRef(function Input(
 	{ className, isValid = true, appearence, ...props },
 	ref
 ) {
@@ -19,3 +19,5 @@ export const Input = forwardRef(function Input(
 		</div>
 	);
 });
+
+export default Input;

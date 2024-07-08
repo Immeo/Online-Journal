@@ -1,12 +1,12 @@
 import cn from 'classnames';
 import { useContext, useEffect, useReducer, useRef } from 'react';
 import { UserContext } from '../../context/user.context';
-import { Button } from '../Button/Button';
-import { Input } from '../Input/Input';
+import Button from '../Button/Button';
+import Input from '../Input/Input';
 import styles from './JournalForm.module.css';
 import { INITIAL_STATE, formReducer } from './JournalForm.state';
 
-export function JournalForm({ addDataItem }) {
+export default function JournalForm({ addDataItem }) {
 	const [formState, disatchForm] = useReducer(formReducer, INITIAL_STATE);
 	const { isValid, isFormReadyToSubmit, values } = formState;
 	const titleRef = useRef();

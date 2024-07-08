@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { UserContext } from '../../context/user.context';
 import styles from './SelectUser.module.css';
 
-export function SelectUser() {
+function SelectUser() {
 	const { userId, setUserId } = useContext(UserContext);
 
 	const changeUser = event => {
@@ -23,3 +23,4 @@ export function SelectUser() {
 		</>
 	);
 }
+export default SelectUser;

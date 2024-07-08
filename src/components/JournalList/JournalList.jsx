@@ -3,7 +3,7 @@ import { UserContext } from '../../context/user.context';
 import CardButton from '../CardButton/CardButton';
 import JournalItem from '../JournalItem/JournalItem';
 
-export function JournalList({ items }) {
+export default function JournalList({ items }) {
 	const { userId } = useContext(UserContext);
 
 	if (items.length === 0) {

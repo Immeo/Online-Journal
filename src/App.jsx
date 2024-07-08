@@ -1,12 +1,12 @@
 import './App.css';
-import { Header } from './components/Header/Header';
-import { JournalAddButton } from './components/JournalAddButton/JournalAddButton';
-import { JournalForm } from './components/JournalForm/JournalForm';
-import { JournalList } from './components/JournalList/JournalList';
+import Header from './components/Header/Header';
+import JournalAddButton from './components/JournalAddButton/JournalAddButton';
+import JournalForm from './components/JournalForm/JournalForm';
+import JournalList from './components/JournalList/JournalList';
 import { UserContextProvider } from './context/user.context';
-import { useLocalStorage } from './hooks/use-localstorage.hook';
-import { BodyContent } from './layouts/BodyContent/BodyContent';
-import { LeftPanel } from './layouts/LeftPanel/LerftPanel';
+import useLocalStorage from './hooks/use-localstorage.hook';
+import BodyContent from './layouts/BodyContent/BodyContent';
+import LeftPanel from './layouts/LeftPanel/LerftPanel';
 
 function mapItems(items) {
 	if (!items) {
