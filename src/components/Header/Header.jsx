@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import Button from '../Button/Button';
 import Logotype from '../Logotype/Logotype';
 import SelectUser from '../SelectUser/SelectUser';
@@ -8,9 +8,9 @@ const logos = ['/logo.svg', '/personal-journal.svg'];
 
 function Header() {
 	const [logoIndex, setLogoIndex] = useState(0);
-	const toggleLogo = () => {
+	const toggleLogo = useCallback(() => {
 		setLogoIndex(state => Number(!state));
-	};
+	}, []);
 
 	return (
 		<header className={styles['Header']}>
