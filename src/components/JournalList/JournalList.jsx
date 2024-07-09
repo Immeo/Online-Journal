@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 import { UserContext } from '../../context/user.context';
 import CardButton from '../CardButton/CardButton';
 import JournalItem from '../JournalItem/JournalItem';
@@ -17,16 +17,18 @@ export default function JournalList({ items }) {
 		}
 	};
 
+	const filteredItems = useMemo(
+		() => items.filter(el => el.userId === userId).sort(sortItems),
+		[items, userId]
+	);
+
 	return (
 		<>
-			{items
-				.filter(el => el.userId === userId)
-				.sort(sortItems)
-				.map(el => (
-					<CardButton key={el.id}>
-						<JournalItem title={el.title} text={el.text} date={el.date} />
-					</CardButton>
-				))}
+			{filteredItems.map(el => (
+				<CardButton key={el.id}>
+					<JournalItem title={el.title} text={el.text} date={el.date} />
+				</CardButton>
+			))}
 		</>
 	);
 }
