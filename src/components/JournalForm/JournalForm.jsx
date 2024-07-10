@@ -6,7 +6,7 @@ import Input from '../Input/Input';
 import styles from './JournalForm.module.css';
 import { INITIAL_STATE, formReducer } from './JournalForm.state';
 
-export default function JournalForm({ addDataItem }) {
+export default function JournalForm({ addDataItem, data }) {
 	const [formState, disatchForm] = useReducer(formReducer, INITIAL_STATE);
 	const { isValid, isFormReadyToSubmit, values } = formState;
 	const titleRef = useRef();
@@ -45,8 +45,9 @@ export default function JournalForm({ addDataItem }) {
 		if (isFormReadyToSubmit) {
 			addDataItem(values);
 			disatchForm({ type: 'CLEAR' });
+			disatchForm({ type: 'INPUT_CHANGE', payload: { userId } });
 		}
-	}, [isFormReadyToSubmit, values, addDataItem]);
+	}, [isFormReadyToSubmit, values, addDataItem, userId]);
 
 	const onChange = e => {
 		disatchForm({
@@ -55,14 +56,21 @@ export default function JournalForm({ addDataItem }) {
 		});
 	};
 
-	const addNotes = e => {
-		e.preventDefault();
-		disatchForm({ type: 'SUBMIT' });
-	};
+	useEffect(() => {
+		disatchForm({
+			type: 'INPUT_CHANGE',
+			payload: { ...data },
+		});
+	}, [data]);
 
 	useEffect(() => {
 		disatchForm({ type: 'INPUT_CHANGE', payload: { userId } });
 	}, [userId]);
+
+	const addNotes = e => {
+		e.preventDefault();
+		disatchForm({ type: 'SUBMIT' });
+	};
 
 	return (
 		<form className={styles['journal-form']} onSubmit={addNotes}>
@@ -85,7 +93,9 @@ export default function JournalForm({ addDataItem }) {
 				</label>
 				<Input
 					ref={dateRef}
-					value={values.date}
+					value={
+						values.date ? new Date(values.date).toISOString().slice(0, 10) : ''
+					}
 					isValid={isValid.date}
 					onChange={onChange}
 					type='date'

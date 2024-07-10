@@ -3,7 +3,7 @@ import { UserContext } from '../../context/user.context';
 import CardButton from '../CardButton/CardButton';
 import JournalItem from '../JournalItem/JournalItem';
 
-export default function JournalList({ items }) {
+export default function JournalList({ items, setItem }) {
 	const { userId } = useContext(UserContext);
 
 	if (items.length === 0) {
@@ -25,7 +25,7 @@ export default function JournalList({ items }) {
 	return (
 		<>
 			{filteredItems.map(el => (
-				<CardButton key={el.id}>
+				<CardButton key={el.id} onClick={() => setItem(el)}>
 					<JournalItem title={el.title} text={el.text} date={el.date} />
 				</CardButton>
 			))}

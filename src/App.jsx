@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './App.css';
 import Header from './components/Header/Header';
 import JournalAddButton from './components/JournalAddButton/JournalAddButton';
@@ -20,6 +21,7 @@ function mapItems(items) {
 
 function App() {
 	const [dataItems, setData] = useLocalStorage('localData');
+	const [selectedItem, setSelectedItem] = useState({});
 
 	const addDataItem = dataItem => {
 		if (!dataItem.id) {
@@ -34,6 +36,17 @@ function App() {
 					date: new Date(),
 				},
 			]);
+		} else {
+			setData([
+				...mapItems(dataItems).map(i => {
+					if (i.id === dataItem.id) {
+						return {
+							...dataItem,
+						};
+						return i;
+					}
+				}),
+			]);
 		}
 	};
 
@@ -43,10 +56,10 @@ function App() {
 				<LeftPanel>
 					<Header />
 					<JournalAddButton />
-					<JournalList items={mapItems(dataItems)} />
+					<JournalList items={mapItems(dataItems)} setItem={setSelectedItem} />
 				</LeftPanel>
 				<BodyContent>
-					<JournalForm addDataItem={addDataItem} />
+					<JournalForm addDataItem={addDataItem} data={selectedItem} />
 				</BodyContent>
 			</div>
 		</UserContextProvider>
