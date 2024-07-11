@@ -12,7 +12,7 @@ function SelectUser() {
 		<>
 			<select
 				name='user'
-				className={styles.select}
+				className={styles['select']}
 				value={userId}
 				id='user'
 				onChange={changeUser}

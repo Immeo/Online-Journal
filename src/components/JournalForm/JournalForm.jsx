@@ -6,7 +6,7 @@ import Input from '../Input/Input';
 import styles from './JournalForm.module.css';
 import { INITIAL_STATE, formReducer } from './JournalForm.state';
 
-export default function JournalForm({ addDataItem, data }) {
+export default function JournalForm({ addDataItem, data, onDelete }) {
 	const [formState, disatchForm] = useReducer(formReducer, INITIAL_STATE);
 	const { isValid, isFormReadyToSubmit, values } = formState;
 	const titleRef = useRef();
@@ -57,6 +57,16 @@ export default function JournalForm({ addDataItem, data }) {
 	};
 
 	useEffect(() => {
+		if (!data) {
+			disatchForm({
+				type: 'CLEAR',
+			});
+			disatchForm({
+				type: 'INPUT_CHANGE',
+				payload: { userId },
+			});
+		}
+
 		disatchForm({
 			type: 'INPUT_CHANGE',
 			payload: { ...data },
@@ -72,9 +82,20 @@ export default function JournalForm({ addDataItem, data }) {
 		disatchForm({ type: 'SUBMIT' });
 	};
 
+	const deleteNotes = () => {
+		onDelete(data.id);
+		disatchForm({
+			type: 'CLEAR',
+		});
+		disatchForm({
+			type: 'INPUT_CHANGE',
+			payload: { userId },
+		});
+	};
+
 	return (
 		<form className={styles['journal-form']} onSubmit={addNotes}>
-			<div>
+			<div className={styles['form__row']}>
 				<Input
 					ref={titleRef}
 					value={values.title}
@@ -85,6 +106,15 @@ export default function JournalForm({ addDataItem, data }) {
 					placeholder='Title'
 					appearence='title'
 				/>
+				{data?.id && (
+					<button
+						className={styles['form__btn__remove']}
+						type='button'
+						onClick={deleteNotes}
+					>
+						<img src='/archiveIcon.svg' alt='delete notes' />
+					</button>
+				)}
 			</div>
 			<div className={styles['form__row']}>
 				<label htmlFor='form__label' className={styles['form__label']}>

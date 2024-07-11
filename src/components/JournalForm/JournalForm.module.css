@@ -4,6 +4,11 @@
 	gap: 30px;
 }
 
+.form__row {
+	display: flex;
+	align-items: center;
+}
+
 .form__title__input {
 	padding: 10px;
 	font-family: 'Source Sans 3', sans-serif;
@@ -19,9 +24,19 @@
 	color: #f2f2f2;
 }
 
-.form__row {
-	display: flex;
+.form__btn__remove {
+	width: 30px;
+	height: 30px;
+	padding: 0;
 	align-items: center;
+	border: none;
+	cursor: pointer;
+	background: none;
+}
+
+.form__btn__remove {
+	border-radius: 50%;
+	background: rgb(255, 255, 255, 0.05);
 }
 
 .form__label {
